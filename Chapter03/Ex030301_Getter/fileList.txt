@@ -1,0 +1,2 @@
+C:\java\Chapter03_Class\Ex030301_Getter\src\academy\codechosun\character\Human.java
+C:\java\Chapter03_Class\Ex030301_Getter\src\academy\codechosun\engine\World.java
