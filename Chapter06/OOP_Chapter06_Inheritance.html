@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OOP Chapter 06. Inheritance</title>
+        <link rel="stylesheet" href="../font/font.css">
+
+    </head>
+
+    <body>
+        <h1>Chapter 06. Inheritance</h1>
+        <h2>6.0 상속</h2>
+        <h4>6.0-0 상속(Inheritance)</h4>
+        <p>
+            - 거의 모든 사람이 OOP의 핵심이라 여기는 특성입니다. <br>
+              초창기 OO에서 가장 중요한 특성이라 여겼습니다. <br>
+              재사용성이 궁극의 목적이라 신봉하던 시대입니다. <br>
+              현재에도 상속을 지원하지 않으면 OO언어라고 안 보는게 보통입니다. <br><br>
+
+            - OOP의 또 다른 매우 중요한 특성인 다형성의 기반이 되는 특성입니다. <br><br>
+
+        </p>
+        <h4>6.0-1 상속과 재사용성의 관계</h4>
+        <p>
+            - 상속 즉, 부모님 재산은 부모님이 쓰면 사라지는거고, 내가 상속 받아 쓰면 또 그만큼 사라지는데, <br>
+              어디를 봐서 재사용성과 관련이 있다는 걸까요? <br><br>
+
+            - Inheritance, 상속의 의미는 부모님의 어떤 특징을 물려받는 거에 좀 더 가깝습니다. <br>
+              보통 이런 걸 유전(Heredity)이라고 하죠. 실제로 영어권에서는 유전을 Inheritance라고도 합니다. <br><br>
+
+            - 그런데, 부모님하고 다를수도 있습니다. 돌연변이의 가능성도 있습니다. <br>
+              이런 다윈의 진화론 같은 내용이 OOP의 상속에도 있습니다. <br><br>
+
+        </p>
+        <h4>6.0-2 OOP에서의 상속이란</h4>
+        <p>
+            - 이미 존재하는 클래스를 기반으로 새 클래스를 만드는 방법입니다. <br> 
+              새 클래스는 기존 클래스의 상태와 동작을 그대로 물려 받습니다.(유전) <br>
+              그 외에 새 클래스만의 상태와 동작을 추가 가능합니다.(진화) <br>
+              물론 이 새 클래스를 상속해서 또 다른 클래스를 만들 수도 있습니다. <br><br>  
+            
+        </p>
+        <h4>6.0-3 용어 설명</h4>
+        <p>
+            - 부모 클래스: 이미 존재하는 클래스를 부르는 용어입니다. <br>
+              부모(Parent) 클래스, 기반(Base) 클래스 <br><br>
+
+            - 자식 클래스: 새 클래스를 부르는 용어입니다. <br>
+              자식(Child) 클래스, 파생(Derived) 클래스 <br><br>
+
+        </p>
+        <h4>6.0-4 두 클래스 간의 상속 관계를 설명하는 표현</h4>
+        <p>
+            - 자식 클래스가 부모 클래스를 상속받았다. <br><br>
+
+            - 자식 클래스가 부모 클래스로부터 파생되었다. <br><br>
+
+            - 자식 클래스가 부모 클래스의 한 종류이다.(is-a) <br><br>
+
+        </p>
+        <h4>6.0-5 클래스 다이어그램: Student와 Teacher</h4>
+        <p>
+            - 간단한 예를 한 번 봅시다. 학생과 선생님을 모델링 해 봅시다. <br><br>
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Student</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -firstName: String <br>
+                        -lastName: String <br>
+                        -major: Major <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Student(String, String) <br>
+                        +getFullName(): String <br>
+                        +getMajorOrNull(): Major <br>
+                        +changeName(String, String) <br>
+                        +setMajor(Major) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Teacher</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -firstName: String <br>
+                        -lastName: String <br>
+                        -department: Department <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Teacher(String, String, Department) <br>
+                        +getFullName(): String <br>
+                        +getDepartment(): Department <br>
+                        +changeName(String, String) <br>
+                        +setDepartment(Department) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <h4>6.0-6 클래스 다이어그램에서 보이는 코드의 중복</h4>
+        <p>
+            - 먼저 멤버 변수로는 firstName, lastName이 중복됩니다. <br>
+              메서드로는 getFullName(), changeName() 메서드가 중복됩니다. <br><br>
+
+            - 절반 정도가 중복되어 있습니다. <br>
+              학생과 선생에게 공통분모가 있기 때문에 이렇게 중복되는 코드가 많아지는 것입니다. <br>
+              사람이라는 공통분모가 있기 때문입니다. <br><br>
+
+        </p>
+        <h4>6.0-7 벤다이어그램으로 그리면</h4>
+        <p></p>
+        <h4>6.0-8 벤 다이어그램으로 보는 상속: Student</h4>
+        <p></p>
+        <h4>6.0-9 벤 다이어그램으로 보는 상속: Teacher</h4>
+        <p></p>
+        <h4>6.0-10 무엇이 Person 클래스로 편입될까요</h4>
+        <p></p>
+        <h4>6.0-11 코드 중복이 없게 세 클래스로 나눈 결과</h4>
+        <p>
+            <a href="">Ex060011_university_ver1</a><br><br>
+
+            - 다 잘 나누긴 했는데, 상속은 아직 하지 않은 상황이라 컴파일 오류가 나는 상황입니다. <br>
+              벤 다이어그램으로 보면 모두 다 떨어져 있는 형국입니다. <br><br>
+
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Person</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -firstName: String <br>
+                        -lastName: String <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Person(String, String) <br>
+                        +getFullName(): String <br>
+                        +changeName(String, String) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Student</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -major: Major <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Student() <br>
+                        +getMajorOrNull(): Major <br>
+                        +setMajor(Major) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Teacher</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -department: Department <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Teacher(Department) <br>
+                        +getDepartment(): Department <br>
+                        +setDepartment(Department) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <h4>6.0-12 extends 키워드와 생성자</h4>
+        <p>
+            - 먼저, 자식 클래스명 옆에 "extends 부모클래스명"을 적어주어야 합니다. <br>
+              public class Student extends Person {...} <br>
+              이 상태로 컴파일을 해 보시면, 또 오류가 난다는 것을 알 수 있습니다. 그 이유를 알아봅시다. <br><br>
+
+            - 부모 부분의 초기화는 부모의 생성자가 담당하게 됩니다. <br>
+              자식 부분의 초기화는 당연히 자식의 생성자가 담당하게 됩니다. <br><br>
+
+            - 부모가 존재한 뒤에 자식이 존재하므로, 아래와 같은 순서에 따릅니다. <br>
+              첫 번째, 메모리에 개체 생성 <br>
+              두 번째, 부모 생성자의 호출 <br>
+              세 번째, 자식 생성자의 호출 <br><br>
+
+            - 예제 코드에서는 Student 클래스의 생성자는 default 생성자와 별반 다를바가 없었습니다. <br>
+              이 경우, 컴파일러는 부모 생성자 중 default 생성자를 자동으로 호출하게 됩니다. <br><br>
+              
+            - 그러나 위 예제에서 Person 클래스에는 default 생성자가 없었기 때문에, extends 키워드만 추가하고 컴파일 했을 때 오류가 난 것입니다. <br><br>
+
+            - 그럼 Person 클래스에 default 생성자를 추가하기만 하고 컴파일 하면 될까요? <br>
+              초보자가 가장 많이 하는 실수 중 하나입니다. "개체는 생성 시부터 유효한 상태를 가져야한다."라는 조건을 위배한 것입니다. <br>
+              따라서, 원래 있던 생성자만을 유지해야 합니다. 그럼 해결 방법이 무엇일까요? <br><br>
+
+        </p>
+
+        <h4>6.0-13 super 키워드</h4>
+        <p>
+            - super는 현 개체의 부모 부분을 가르킵니다. <br><br>
+
+            - super(&#60매개변수 목록&#62)라고 코드를 작성하면 부모의 생성자를 호출할 수 있습니다. <br>
+              ex. super(firstName, lastName); <br><br>
+
+            - 부모의 멤버 변수나 메서드를 호출할 때도 사용 가능합니다. <br>
+              super.&#60부모의 멤버변수&#62&#59 <br>
+              super.&#60부모의 메서드&#62&#59 <br>
+
+            <a href="">- Ex060013_extendsAndSuper</a><br><br>
+
+            - 단순히 Student를 2개의 클래스로 나눈게 아닙니다. <br>
+              Person 클래스 그 자체로도 사용 가능합니다. <br>
+              단, Person 개체는 Student 클래스의 멤버에 접근할 수 없습니다. <br><br>
+
+        </p>
+        <h4>6.0-14 상속을 적용한 클래스 다이어그램</h4>
+        <p>
+            - 상속 관계를 나타내는 선의 방향은 자식에서 부모를 향하게끔 그립니다. <br><br>
+
+            - 생성자 인자를 부모에게 재전달할 수 있지만, 언제나 그런 것은 아닙니다. <br><br>
+
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>기호</td>
+                    <td>클래스간의 관계</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>───▷</td>
+                    <td>상속관계</td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Person</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -firstName: String <br>
+                        -lastName: String <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Person(String, String) <br>
+                        +getFullName(): String <br>
+                        +changeName(String, String) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Student</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -major: Major <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Student(String, String) <br>
+                        +getMajorOrNull(): Major <br>
+                        +setMajor(Major) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Teacher</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -department: Department <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Teacher(String, String, Department) <br>
+                        +getDepartment(): Department <br>
+                        +setDepartment(Department) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <h4>6.0-15 학교 이메일 주소를 추가하기</h4>
+        <p>
+            - 이 학교의 학생과 선생은 모두 이메일 주소(전부 소문자, 동명이인은 없음)를 가집니다. <br>
+              이메일 주소 생성 규칙은 "이름 영문의 첫글자 + 성씨 전체"@codechosun.academy 입니다. <br><br>
+
+            - 이메일 주소는 절대 바뀌지 않습니다. 이름이 바뀐다 해도 바뀌지 않습니다. <br>
+              단, 선생은 자유로이 이메일 주소를 바꿀 수 있습니다. <br><br>
+
+            - 그렇다면 어느 클래스에 이메일 주소를 저장해야 할까요? <br>
+              당연히 학생과 선생에 공통이니 Person 클래스에 저장하면 되겠죠. <br>
+              처음 개체를 생성할 때 초기화 해주면 됩니다. <br><br>
+
+            <a href="">- Ex060015_university_ver2</a><br><br>
+
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Person</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -firstName: String <br>
+                        -lastName: String <br>
+                        -email: String <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Person(String, String) <br>
+                        +getFullName(): String <br>
+                        +changeName(String, String) <br>
+                        +getEmail(): String <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Student</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -major: Major <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Student(String, String) <br>
+                        +getMajorOrNull(): Major <br>
+                        +setMajor(Major) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Teacher</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -department: Department <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Teacher(String, String, Department) <br>
+                        +getDepartment(): Department <br>
+                        +setDepartment(Department) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <h4>6.0-16 Teacher 클래스 개체는 이메일 주소를 변경할 수 있게끔 하기</h4>
+        <p>
+            - 선생만 이메일 주소 변경이 가능하므로, Teacher 클래스에 메서드를 만들어 봅니다. <br>
+              public void setEmail(String email) { <br>
+                  this.email = email; <br>
+              } <br>
+              "email has private access in academy.codechosun.models"라는 컴파일 에러가 나옵니다. <br><br>
+
+            - 오류가 난 것에만 집중하고, 아래와 같이 코드를 수정합니다. <br>
+              public void setEmail(String email) { <br>
+                  super.email = email; <br>
+              } <br>
+              똑같은 오류 문구가 나옵니다. 왜 그럴까요? <br><br>
+
+            - 그럼 이번엔 setmain() 메서드를 Person 클래스에 만들어 버립니다. <br>
+              무엇이 문제일까요? Student 클래스 개체들도 이메일을 바꿀 수 있어집니다. <br><br>
+
+            - 이럴때, email 멤버 변수에 protected 접근 제어자를 붙히고 Teacher 클래스에 setEmail() 메서드를 구현합니다. <br><br>
+
+        </p>
+        <h4>6.0-17 접근 제어자: protected</h4>
+        <p>
+            - protected &#60자료형&#62 &#60변수명&#62&#59 <br>
+            protected &#60자료형&#62 &#60변수명&#62 (&#60매개변수 목록&#62) { ... } <br>
+            protected class &#60클래스명&#62 { ... } <br><br>
+
+            - 외부자들은 접근할 수 없습니다. <br>
+              클래스 내부, 같은 패키지에 속한 클래스, 자식 클래스만 접근 가능합니다. <br>
+              클래스의 경우 내포된(nested) 클래스에 한 해 붙일 수 있습니다. <br><br>
+
+            <a href="">- Ex060017_personWithProtected</a><br><br>
+
+            - 클래스 다이어그램에서 접근 제어자는 #으로 표현합니다. <br><br>
+
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Person</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -firstName: String <br>
+                        -lastName: String <br>
+                        #email: String <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Person(String, String) <br>
+                        +getFullName(): String <br>
+                        +changeName(String, String) <br>
+                        +getEmail(): String <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Student</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -major: Major <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Student(String, String) <br>
+                        +getMajorOrNull(): Major <br>
+                        +setMajor(Major) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Teacher</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -department: Department <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Teacher(String, String, Department) <br>
+                        +getDepartment(): Department <br>
+                        +setDepartment(Department) <br>
+                        +setEmail(String) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <h4>6.0-18 정리: 접근 제어자</h4>
+        <p></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>접근 제어자</td>
+                    <td>클래스 내부</td>
+                    <td>같은 패키지</td>
+                    <td>자식 클래스</td>
+                    <td>외부</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>public</td>
+                    <td>접근 가능</td>
+                    <td>접근 가능</td>
+                    <td>접근 가능</td>
+                    <td>접근 가능</td>
+                </tr>
+                <tr>
+                    <td>protected</td>
+                    <td>접근 가능</td>
+                    <td>접근 가능</td>
+                    <td>접근 가능</td>
+                    <td>접근 불가능</td>
+                </tr>
+                <tr>
+                    <td>기본/패키지</td>
+                    <td>접근 가능</td>
+                    <td>접근 가능</td>
+                    <td>접근 불가능</td>
+                    <td>접근 불가능</td>
+                </tr>
+                <tr>
+                    <td>private</td>
+                    <td>접근 가능</td>
+                    <td>접근 불가능</td>
+                    <td>접근 불가능</td>
+                    <td>접근 불가능</td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <h4>6.0-19 손주 클래스</h4>
+        <p>
+            - 선생 클래스의 자식 클래스인 전임 강사 클래스와 시간 강사 클래스를 구현 해 보도록 합시다. <br>
+              전임 강사만 오피스가 있고, 시간 강사의 경우 일주일에 몇 시간 일하는지 정해집니다. <br>
+              Person 클래스에게는 손주(grandchild)뻘인 클래스들을 구현 해 봅시다. <br><br>
+
+            - 두 가지 가정 하에 구현 해 봅시다. <br>
+              첫째, 시간 강사는 채용 시 몇 시간 일할지 안 정해져 있을 수도 있습니다. <br>
+              따라서 생성자를 두 개 만듭니다. <br>
+              둘째, 전임 강사는 채용시 오피스를 바로 배정받지 않습니다. <br>
+              따라서 오피스 번호가 생성자 매개변수에 없습니다. 이때는 오피스 번호가 0입니다.(0은 올바르지 않은 오피스번호로 간주) <br><br>
+
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Person</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -firstName: String <br>
+                        -lastName: String <br>
+                        #email: String <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Person(String, String) <br>
+                        +getFullName(): String <br>
+                        +changeName(String, String) <br>
+                        +getEmail(): String <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Student</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -major: Major <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Student(String, String) <br>
+                        +getMajorOrNull(): Major <br>
+                        +setMajor(Major) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>Teacher</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -department: Department <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +Teacher(String, String, Department) <br>
+                        +getDepartment(): Department <br>
+                        +setDepartment(Department) <br>
+                        +setEmail(String) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>FullTimeTeacher</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -officeNumber: int = 0 <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +FullTimeTeacher(String, String, Department) <br>
+                        +getOfficeNumber(): int <br>
+                        +setOfficeNumber(int) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td><b>PartTimeTeacher</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        -weeklyHours: int = 0 <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        +PartTimeTeacher(String, String, Department) <br>
+                        +PartTimeTeacher(String, String, Department, int) <br>
+                        +getWeeklyHours(): int <br>
+                        +setWeeklyHours(int) <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <h4>6.0-20 FullTimeTeacher 클래스와 PartTimeTeacher 클래스</h4>
+        <p>
+            <a href="">- Ex060020_university_ver3</a><br><br>
+
+            - Person 개체에 가까워질수록 "일반적(General)"이라고 합니다. <br>
+              반대로 손주 클래스들에 가까워질수록 "특징적/구체적(Specific)"이라고 합니다. <br><br>
+
+        </p>
+        <h4>6.0-21 수학에서의 부분집합과 OOP에서의 is-a 관계</h4>
+        <p>
+            - Student는 Person인가요? Teacher는 Person인가요? <br>
+              그럼 PartTimeTeacher는 Person인가요? <br><br>
+
+            - 반대로 Person은 Student인가요? 전부 다 그렇진 않습니다. <br>
+              이는 수학에서 부분집합의 개념과 같습니다. <br><br>
+
+            - 수학에서의 부분집합 관계를 OOP에서는 is-a 관계라고 합니다. <br>
+              즉 상속관계의 다른 표현이라고 보시면 됩니다. <br>
+              ex. A student is (still) a Person. A part-time teacher is (still) a Teacher. <br><br>
+
+            - 참고로 컴포지션 관계의 다른 표현을 has-a 관계라고 부릅니다. <br><br>
+
+        </p>
+        <h4>6.0-22 상속 Vs. 컴포지션</h4>
+        <p>
+            - 둘 다 재사용성을 위한 방법입니다. <br><br>
+
+            - 상속으로 해결할 수 있는 많은 문제를 컴포지션으로도 가능합니다. <br>
+              물론 그 반대도 마찬가지입니다. <br>
+              순전히 기술적인 관점입니다. <br><br>
+
+            - 역사적으로 사람들의 선호도는 왔다 갔다했습니다. <br>
+              초창기에는 상속을 과도하게 선호하였습니다. <br>
+              그 후 무조건 컴포지션이 답이라는 잘못된 조언을 많이 따랐습니다. 지금도 여전한 풍토입니다. <br><br>
+
+            - OO에서 큰 결정사항 중 하나: 상속 Vs. 컴포지션 중 하나를 고르는 것입니다. <br><br>
+
+            - 일단 아래의 간단한 가이드라인을 따르는 것이 좋습니다. <br>
+              실생활에서 개체들끼리의 관계를 기준으로 선택합니다. <br>
+              has-a 관계이면 컴포지션, is-a 관계이면 상속을 선택합니다. <br><br>
+
+            - 물론 훌륭한 프로그래머들은 필요에 따라 이 규칙을 어깁니다. <br><br>
+
+            - 나중에 다시 배우게 될 주제입니다. <br><br>
+
+        </p>
+        <h4>6.0-23 실제 프로그래밍에서 is-a 관계를 활용하는 방법</h4>
+        <p>
+            - Students는 Person이라고 했으므로, 아래 코드는 컴파일 가능합니다. <br>
+              Student st = new Student("park", "Lu"); <br>
+              Person person = st; <br><br>
+
+            - PartTimeTeacher도 Person이라고 했으므로, 아래 코드는 컴파일 가능합니다. <br>
+              PartTimeTeacher partTimer = new PartTimeTeacher("Su", "Park", Department.MATHMATICS); <br>
+              Teacher teacher = partTimer; <br>
+              Person person = partTimer; <br><br>
+
+            - Person 배열에 학생과 시간 강사를 모두 넣는 것도 가능합니다. <br>
+              Person[] people = new Person[2]; <br>
+              people[0] = new Student("Park", "Soo"); <br>
+              people[1] = new PartTimeTeacher("Lu", "Dam", Department.MATHMATICS); <br><br>
+
+            - 이 모든게 가능한 이유는 두 클래스 간의 관계가 is-a 관계이기 때문입니다. <br><br>
+
+            - 그렇다면, 반대로 생각해 봅시다. <br>
+              Person은 Student인가요? Teacher는 PartTimeTeacher인가요? Person은 PartTimeTeacher인가요? <br><br>
+
+            - Person은 Student인가요? 아래 코드는 컴파일 불가능합니다. <br>
+              Person person = new Person("lan", "Gea"); <br>
+              Student st = person; <br><br>
+
+            - 그럼 살짝 속여서, 컴파일 가능할까요? 불가능합니다. <br>
+              Student st = new Student("soo", "Park"); <br>
+              Person person = st; <br>
+              Student st2 = person; <br><br>
+
+        </p>
+        <h4>6.0-24 부모를 자식에게 대입할 수 있게 되면</h4>
+        <p>
+            - 왜 불가능할까요? 아래와 같은 경우 때문입니다. <br>
+              public static Student convertToStudent(Person person) <br>
+              { <br>
+                Student st = person; <br>
+                return st; <br>
+              } <br><br>
+
+              convertToStudent(student); <br>
+              convertToStudent(teacher); <br>
+              convertToStudent(partTimer); <br><br>
+
+            - 메서드 호출은 호출자 마음입니다. <br>
+              Person 및 Person의 자식 클래스를 모두 전달할 수 있는 위 함수는 실행 중에 반드시 Student 개체만 들어온다는 보장이 없습니다. <br><br>
+
+            - 즉 정리하자면 부모 클래스 개체에 자식 클래스 개체를 대입하는건 괜찮습니다. <br>
+              그러나, 자식 클래스 개체에 부모 클래스 개체를 대입하는건 때에 따라 다릅니다. <br><br>
+
+            - 그래서 자식 클래스 개체에 부모 클래스 개체를 대입하는 코드는 컴파일러가 막습니다. <br><br>
+
+            - 마찬가지의 이유로, 자식 클래스 개체를 부모 클래스 개체에 대입한 뒤, 부모 클래스 개체에서 자식 클래스 개체의 메서드를 호출 할 수 없습니다. <br><br>
+
+        </p>
+        <h4>6.0-25 자식을 부모에 대입하는건 암시적 캐스팅</h4>
+        <p>
+            - 사실 아래의 코드는 암시적 캐스팅입니다. <br>
+              Person person = student; // == Person person = (Person) student; <br><br>
+
+            - 부모 클래스 개체에 자식 클래스 개체를 대입하는 것은 사실 암시적 캐스팅이 됩니다. <br>
+              컴파일러가 암시적(Implicit)으로 해줍니다. <br><br>
+
+            - 왜 가능할까요? is-a 관계일때만 암시적으로 캐스팅 해줍니다. <br><br>
+
+            - 따라서 코드에서 부모로의 명시적 캐스팅은 거의 대부분 생략합니다. <br><br>
+
+        </p>
+        <h4>6.0-26 그 반대 캐스팅은 반드시 명시적으로</h4>
+        <p>
+            - 자식 클래스 개체에 부모 클래스 개체를 대입하는 것은 명시적 캐스팅으로만 가능합니다. <br>
+              즉, 프로그래머가 "내가 뭘 하려는건지 잘 이해하고 있어. 그러니 날 믿고 컴파일해."라고 지시하는 것과 같습니다. <br>
+              ex. Student st1 = new Student("student", "Park"); <br>
+                  Person person = st1; <br>
+                  Student st2 = (Student) person; <br><br>
+
+            - 위 코드를 분석하자면, <br>
+              부모를 자식으로 캐스팅 후 호출 -> 컴파일 성공 <br><br>
+
+        </p>
+        <h4>6.0-27 전혀 상관없는 클래스로 캐스팅한다면?</h4>
+        <p>
+            - 컴파일러가 잡아줍니다. <br>
+              Teacher teacher = new Teacher("soo", "Park", Department.MATHMATICS); <br>
+              Student st1 = (Student) teacher; <br><br>
+
+        </p>
+        <h4>6.0-28 컴파일러는 상속 구조상 말이 안되는 경우 오류를 발생시킵니다.</h4>
+        <p>
+            - 정리 하자면, Person은 Student일 수도 있으니 컴파일러가 허용 해 줍니다. <br>
+              그러나, Teacher가 Student일리 없으니 허용하지 않습니다. 즉, 형제자매 간의 캐스팅은 불가능합니다. <br><br>
+
+            - 컴파일러는 상속 구조상 말이 안되는 경우 오류를 발생 시킵니다. <br><br>
+
+        </p>
+        <h4>6.0-29 컴파일러가 못 잡아내는 경우</h4>
+        <p>
+            - 아래와 같은 코드는 컴파일러가 잡아낼 수 없습니다. <br>
+              Person person = new Student("soo", "Park"); <br>
+              Teacher teacher = (Teacher) person; <br><br>
+
+            - 위와 같은 코드는 실행 중에 예외가 발생합니다. <br>
+              예외명은 ClassCastException이고, 예외처리(Exception Handling)에 대해서는 나중에 자세히 설명 하도록 하겠습니다. <br><br>
+
+            - 그렇다면 어떻게 해결 할 수 있을까요? <br>
+              예외를 피할 수 있으면 즉, 저런 코드를 짤 필요가 없다면 안그러는게 가장 좋은 습관입니다. <br>
+              하지만 어쩔 수 없다면 예외 처리 없이 해결하는 방법도 존재합니다. <br>
+              단, 나중에 다형성을 배우고 나면 이렇게 해결할 일이 별로 없어집니다. <br><br>
+
+        </p>
+        <h4>6.0-30 우리가 작성하고 싶은 로직</h4>
+        <p>
+            - Person 개체가 실제로 Teacher 개체인지 확인한 후, 실제로 Teacher 개체인 경우에만 Teacher로 캐스팅 하고자 합니다. <br><br>
+
+            - 결국 부모형 변수에 저장된 개체가 실제 어떤 자식형인지 알 방법이 필요합니다. <br>
+              그것도 실행 중에 필요합니다. <br>
+              이를 RTTI(run time type identification) 기능이라고 합니다. <br><br>
+
+            - 매니지드 언어들은 보통 RTTI를 지원합니다. <br>
+              단, 그만큼 실행 중에 뭔가 할게 더 많아집니다. <br>
+              성능 또는 메모리가 중요한 경우에는 별로인 기능입니다. <br>
+              그래서 C/C++ 등의 언어에서는 RTTI 지원이 없거나 사용을 안합니다. <br><br>
+
+        </p>
+        <h4>6.0-31 instanceof 연산자</h4>
+        <p>
+            - &#60변수명&#62 instanceof &#60클래스명&#62 <br><br>
+
+            - 사용 방법은 아래와 같습니다. <br>
+              Person person = new Student("soo", "Park"); <br>
+              if (person isinstanceof Teacher) { <br>
+                  Teacher teacher = (Teacher) person; <br>
+              } <br><br>
+
+            - 개체가 특정 클래스의 인스턴스인지 판단하는 연산자입니다. <br>
+              참이면 true 반환, 거짓이면 false를 반환합니다. <br><br>
+
+            - instanceof 연산자가 반드시 '특정' 클래스의 인스턴스인지를 확인하는 것은 아닙니다. <br><br>
+
+        </p>
+        <h4>6.0-32 손주에 instanceof를 사용한 예</h4>
+        <p>
+            <a href="">- Ex060032_instanceof</a><br><br>
+
+            - 어찌되었던 간에, 컴파일러가 잡아내지 못하는 경우까지 대비할 수 있게 되었습니다. <br><br>
+
+            - 추가로, instanceof 연산자와 유사한 기능을 가진 메서드도 알아봅시다. <br><br>
+
+        </p>
+        <h4>6.0-33 getClass().getName()</h4>
+        <p>
+            - &#60변수명&#62.getClass() <br>
+              실행 중에 개체의 클래스 정보를 얻어올 수 있습니다. <br>
+              반환된 개체(Class)에는 여러 유용한 메서드가 들어 있습니다. <br>
+              지금은 딱 하나(getClass().getName())만 보고 넘어갈 예정입니다. 그 밖의 함수는 필요할 때 찾아 보면 됩니다. <br><br>
+
+            - 사용 방법은 아래와 같습니다. <br>
+              Person person = new Person("soo", "Park"); <br>
+              Class c = person.getClass(); <br><br>
+
+            - &#60변수명&#62.getClass().getName() <br>
+              클래스명을 반환하는 메서드입니다. 이때 패키지 경로까지 포함하여서 반환합니다. <br><br>
+
+            - 사용 방법은 아래와 같습니다. <br>
+              Person person = new Person("soo", "Park"); <br>
+              System.out.println(person.getClass().getName()); <br><br>
+
+        </p>
+        <h4>6.0-34 언제 사용하나요?</h4>
+        <p>
+            - getClass()를 편하게 사용할 수 있는 경우가 종종 있습니다. <br>
+              주로 클래스 이름을 찾을때, 클래스 안에 있는 메서드나 멤버 변수등도 찾을 수 있습니다. <br><br>
+
+            - getClass().getName()은 정말 많이 사용합니다. <br>
+              ex. 로그(Log) 메세지를 출력할 때 <br><br>
+
+            - getClass()도 메서드인데, 어디에 정의되어 있나요? <br><br>
+
+        </p>
+        <h4>6.0-35 Object 클래스</h4>
+        <p>
+            - Java의 모든 클래스는 Object라는 클래스를 상속 받습니다. <br>
+              즉, 앞에서 Person[]에 넣었던 개체를 Object[]에도 넣을 수 있습니다. <br><br>
+
+            - 모든 클래스는 Object를 상속 받았으니 그 메서드들도 같이 딸려옵니다. <br>
+              Object에는 유용한 메서드들이 종종 있습니다. RTTI도 그 중 하나입니다. <br>
+              ex. getClass(), equals(), toString(), ... <br>
+              이런 메서드들에 대해서는 다형성을 배우고 다시 보게 됩니다. <br><br>
+
+            <a href="">- Ex060035_1_BaseEntity</a><br><br>
+
+        </p>
+    </body>
+
+</html>

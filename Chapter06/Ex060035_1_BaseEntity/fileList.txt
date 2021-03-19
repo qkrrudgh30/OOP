@@ -1,0 +1,5 @@
+C:\java\Chapter06_Inheritance\Ex060035_1_BaseEntity\src\academy\codechosun\baseentity\BaseEntity.java
+C:\java\Chapter06_Inheritance\Ex060035_1_BaseEntity\src\academy\codechosun\baseentity\Course.java
+C:\java\Chapter06_Inheritance\Ex060035_1_BaseEntity\src\academy\codechosun\baseentity\CourseTerm.java
+C:\java\Chapter06_Inheritance\Ex060035_1_BaseEntity\src\academy\codechosun\baseentity\Program.java
+C:\java\Chapter06_Inheritance\Ex060035_1_BaseEntity\src\academy\codechosun\baseentity\Student.java

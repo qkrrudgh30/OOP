@@ -1,0 +1,6 @@
+C:\java\Chapter06_Inheritance\Ex060017_personWithProtected\src\academy\codechosun\engine\App.java
+C:\java\Chapter06_Inheritance\Ex060017_personWithProtected\src\academy\codechosun\models\Department.java
+C:\java\Chapter06_Inheritance\Ex060017_personWithProtected\src\academy\codechosun\models\Major.java
+C:\java\Chapter06_Inheritance\Ex060017_personWithProtected\src\academy\codechosun\models\Person.java
+C:\java\Chapter06_Inheritance\Ex060017_personWithProtected\src\academy\codechosun\models\Student.java
+C:\java\Chapter06_Inheritance\Ex060017_personWithProtected\src\academy\codechosun\models\Teacher.java
