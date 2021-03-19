@@ -1,0 +1,2 @@
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050008_countHowManyObjectCreated\src\academy\codechosun\engine\App.java
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050008_countHowManyObjectCreated\src\academy\codechosun\models\ColaCan.java

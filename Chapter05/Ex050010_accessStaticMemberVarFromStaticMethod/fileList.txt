@@ -1,0 +1,2 @@
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050012_accessStaticMemberVarFromStaticMethod\src\academy\codechosun\engine\App.java
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050012_accessStaticMemberVarFromStaticMethod\src\academy\codechosun\models\ColaCan.java

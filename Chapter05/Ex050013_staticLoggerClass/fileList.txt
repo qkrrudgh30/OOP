@@ -1,0 +1,3 @@
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050013_staticLoggerClass\src\academy\codechosun\staticlogger\Logger.java
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050013_staticLoggerClass\src\academy\codechosun\staticlogger\LogLevel.java
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050013_staticLoggerClass\src\academy\codechosun\staticlogger\Program.java

@@ -1,0 +1,2 @@
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050116_Configuration\src\academy\codechosun\config\Configuration.java
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050116_Configuration\src\academy\codechosun\engine\App.java

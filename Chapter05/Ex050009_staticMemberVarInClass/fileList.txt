@@ -1,0 +1,2 @@
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050009_staticMemberVarInClass\src\academy\codechosun\engine\App.java
+C:\java\Chapter05_Static_Singleton_NestedClass\Ex050009_staticMemberVarInClass\src\academy\codechosun\models\ColaCan.java
