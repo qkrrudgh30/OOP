@@ -1,0 +1,4 @@
+C:\java\Chapter07_ModelingWithInheritance\Ex070205_ClockClass_Ver11_DigitalClock\src\academy\codechosun\engine\App.java
+C:\java\Chapter07_ModelingWithInheritance\Ex070205_ClockClass_Ver11_DigitalClock\src\academy\codechosun\models\AnalogClock.java
+C:\java\Chapter07_ModelingWithInheritance\Ex070205_ClockClass_Ver11_DigitalClock\src\academy\codechosun\models\Clock.java
+C:\java\Chapter07_ModelingWithInheritance\Ex070205_ClockClass_Ver11_DigitalClock\src\academy\codechosun\models\DigitalClock.java

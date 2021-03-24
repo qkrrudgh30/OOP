@@ -1,0 +1,2 @@
+C:\java\Chapter07_ModelingWithInheritance\Ex070104_ClockClass_Ver2\src\academy\codechosun\engine\App.java
+C:\java\Chapter07_ModelingWithInheritance\Ex070104_ClockClass_Ver2\src\academy\codechosun\models\Clock.java
