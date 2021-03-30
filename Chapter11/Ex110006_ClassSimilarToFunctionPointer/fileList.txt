@@ -1,0 +1,4 @@
+C:\java\Chapter11_Interface\Ex110006_ClassSimilarToFunctionPointer\src\academy\codechosun\engine\Program.java
+C:\java\Chapter11_Interface\Ex110006_ClassSimilarToFunctionPointer\src\academy\codechosun\logger\ConsoleLogger.java
+C:\java\Chapter11_Interface\Ex110006_ClassSimilarToFunctionPointer\src\academy\codechosun\logger\LoggerBase.java
+C:\java\Chapter11_Interface\Ex110006_ClassSimilarToFunctionPointer\src\academy\codechosun\processData\DataProcessingProgram.java
